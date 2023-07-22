@@ -28,7 +28,7 @@ REDAFI es una empresa de recolección de datos financieros que necesita obtener 
 
 A continuación, se presenta un diagrama de la arquitectura de la solución de integración de sistemas utilizando Apache Camel:
 
-![Diagrama de la Solución]([diagrama2.png](https://github.com/Giovasdf/ExamenIntegracionSistemas/blob/Main/Diagrama2.png))
+![Diagrama de la Solución](https://github.com/Giovasdf/ExamenIntegracionSistemas/blob/Main/Diagrama2.png)
 
 ## Instalación y Uso
 
