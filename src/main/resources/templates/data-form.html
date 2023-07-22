@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Formulario con Bootstrap</title>
+    <!-- Agregar enlaces a los estilos de Bootstrap -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container mt-4">
+    <h2>Simulador de Envío de Datos</h2>
+    <form action="/processData" method="post">
+        <div class="form-group">
+            <label for="tipoCuenta">Tipo de Cuenta</label>
+            <select class="form-control" id="tipoCuenta" name="tipoCuenta">
+                <option value="Corriente">Corriente</option>
+                <option value="Vista">Vista</option>
+                <option value="Ahorro">Ahorro</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="usuario">Usuario</label>
+            <select class="form-control" id="usuario" name="usuario">
+                <!-- Iterar sobre la lista de usuarios y mostrarlos en el select -->
+                <option th:each="user : ${users}" th:value="${user.id}" th:text="${user.nombre}"></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="data">Numero Cuenta</label>
+            <input type="text" class="form-control" id="data" name="data" placeholder="Ingrese el valor de data">
+        </div>
+        <button type="submit" class="btn btn-primary">Enviar</button>
+    </form>
+</div>
+
+<a href="/messages" class="btn btn-secondary">Ir al Listado</a>
+
+<!-- Agregar enlaces a los scripts de Bootstrap y jQuery al final del documento -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+
+</html>

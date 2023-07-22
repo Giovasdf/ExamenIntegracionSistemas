@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Lista de Mensajes</title>
+  <!-- Agregar enlaces a los estilos de Bootstrap -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container mt-4">
+  <h2>Lista de Mensajes</h2>
+  <ul id="message-list">
+    <!-- Aquí se agregarán los nuevos mensajes -->
+  </ul>
+
+  <!-- Botones para descargar en diferentes formatos -->
+  <div class="mt-4">
+    <button class="btn btn-primary" onclick="downloadData('json')">Descargar como JSON</button>
+    <button class="btn btn-primary" onclick="downloadData('xml')">Descargar como XML</button>
+    <button class="btn btn-primary" onclick="downloadData('txt')">Descargar como Texto</button>
+  </div>
+
+  <!-- Botón para volver al formulario -->
+  <a href="/" class="btn btn-primary mt-4">Volver al Formulario</a>
+</div>
+<!-- Agregar enlaces a los scripts de Bootstrap y jQuery al final del documento -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<!-- Elimina el script anterior y agrega el siguiente script al final del archivo HTML -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sockjs-client/1.6.1/sockjs.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.min.js"></script>
+
+<script>
+    // Crear una conexión WebSocket
+    const socket = new SockJS('/websocket');
+
+    // Establecer el cliente STOMP sobre la conexión WebSocket
+    const stompClient = Stomp.over(socket);
+
+    // Conectar al WebSocket
+   stompClient.connect({}, function (frame) {
+    // Suscribirse al canal donde se enviarán las actualizaciones de mensajes
+    stompClient.subscribe('/queue/messages', function (message) {
+        // Obtener el nuevo mensaje como objeto JSON
+        const newMessage = JSON.parse(message.body);
+
+        // Agregar el nuevo mensaje a la lista de mensajes
+        const messageList = document.getElementById('message-list');
+        const listItem = document.createElement('li');
+        listItem.textContent = newMessage.body;
+        messageList.appendChild(listItem);
+    });
+});
+
+// Función para descargar los datos en diferentes formatos
+function downloadData(format) {
+    const messageList = document.getElementById('message-list');
+    const messages = messageList.textContent.trim(); // Obtener el contenido de los mensajes sin espacios en blanco
+
+    // Crear un elemento <a> para la descarga
+    const downloadLink = document.createElement('a');
+
+    // Definir el contenido del enlace según el formato elegido
+    if (format === 'json') {
+        downloadLink.href = 'data:text/json;charset=utf-8,' + encodeURIComponent(messages);
+        downloadLink.download = 'mensajes.json';
+    } else if (format === 'xml') {
+        downloadLink.href = 'data:text/xml;charset=utf-8,' + encodeURIComponent(messages);
+        downloadLink.download = 'mensajes.xml';
+    } else if (format === 'txt') {
+        downloadLink.href = 'data:text/plain;charset=utf-8,' + encodeURIComponent(messages);
+        downloadLink.download = 'mensajes.txt';
+    } else {
+        return; // Si el formato no es válido, salir de la función sin descargar nada
+    }
+
+    // Simular un clic en el enlace para iniciar la descarga
+    downloadLink.click();
+}
+</script>
+
+</html>
