@@ -1,6 +1,6 @@
 # REDAFI - Solución de Integración de Sistemas
 
-![REDAFI Logo](redafi.png)
+![REDAFI Logo](https://github.com/Giovasdf/ExamenIntegracionSistemas/blob/Main/REDAFI.png)
 
 Bienvenido al repositorio de la solución de integración de sistemas de REDAFI. En este repositorio, encontrarás la implementación de una solución basada en Apache Camel para recolectar datos financieros de múltiples fuentes y consolidarlos en una base de datos centralizada de REDAFI. Esta solución permite integrar diferentes sistemas que entregan datos en formatos distintos, como archivo plano, JSON, XML y API RESTful.
 
@@ -28,7 +28,7 @@ REDAFI es una empresa de recolección de datos financieros que necesita obtener 
 
 A continuación, se presenta un diagrama de la arquitectura de la solución de integración de sistemas utilizando Apache Camel:
 
-![Diagrama de la Solución](diagrama2.png)
+![Diagrama de la Solución]([diagrama2.png](https://github.com/Giovasdf/ExamenIntegracionSistemas/blob/Main/Diagrama2.png))
 
 ## Instalación y Uso
 
